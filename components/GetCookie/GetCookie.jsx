@@ -6,13 +6,13 @@ const PATH_BACK = process.env.NEXT_PUBLIC_PATH_BACK
 
 function connectWithAPI() {
     console.log('PATH_BACK:', PATH_BACK)
-    return fetch(`${PATH_BACK}`, { credentials: 'include' })
+    return fetch(`${PATH_BACK}`, { credentials: 'include', cache: 'no-store' })
         .then(data => data)
 }
 
 function requestCookie() {
     console.log('PATH_BACK:', PATH_BACK)
-    return fetch(`${PATH_BACK}/cookie`, { credentials: 'include' })
+    return fetch(`${PATH_BACK}/cookie`, { credentials: 'include', cache: 'no-store' })
         .then(data => data)
 }
 
