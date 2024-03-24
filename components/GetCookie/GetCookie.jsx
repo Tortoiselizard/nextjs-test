@@ -2,9 +2,12 @@
 
 import { useState } from "react"
 
+const PATH_BACK = process.env.NEXT_PUBLIC_PATH_BACK
+
 function connectWithAPI( place = '') {
     // return fetch('https://cookies-back.vercel.app/')
-    return fetch(`https://cookies-back.vercel.app/${place}`, { credentials: 'include' })
+    // return fetch(`https://cookies-back.vercel.app/${place}`, { credentials: 'include' })
+    return fetch(`${PATH_BACK}/${place}`, { credentials: 'include' })
     // return fetch(`http://localhost:3001/${place}`, { credentials: 'include' })
     // return fetch(`http://localhost:3001/${place}`)
         .then(data => data)
