@@ -11,7 +11,7 @@ function connectWithAPI() {
 }
 
 function requestCookie() {
-    console.log('PATH_BACK:', PATH_BACK)
+    console.log('PATH_BACK:', `${PATH_BACK}/cookie`)
     return fetch(`${PATH_BACK}/cookie`, { credentials: 'include', cache: 'no-store' })
         .then(data => data)
 }
