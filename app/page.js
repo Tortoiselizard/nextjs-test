@@ -1,4 +1,4 @@
-import GetCookie from '@/app/components/GetCookie/GetCookie'
+import GetCookie from '@/components/GetCookie/GetCookie'
 
 function Home() {
 
