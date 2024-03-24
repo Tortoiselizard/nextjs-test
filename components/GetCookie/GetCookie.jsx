@@ -4,12 +4,15 @@ import { useState } from "react"
 
 const PATH_BACK = process.env.NEXT_PUBLIC_PATH_BACK
 
-function connectWithAPI( place = '') {
-    // return fetch('https://cookies-back.vercel.app/')
-    // return fetch(`https://cookies-back.vercel.app/${place}`, { credentials: 'include' })
-    return fetch(`${PATH_BACK}/${place}`, { credentials: 'include' })
-    // return fetch(`http://localhost:3001/${place}`, { credentials: 'include' })
-    // return fetch(`http://localhost:3001/${place}`)
+function connectWithAPI() {
+    console.log('PATH_BACK:', PATH_BACK)
+    return fetch(`${PATH_BACK}`, { credentials: 'include' })
+        .then(data => data)
+}
+
+function requestCookie() {
+    console.log('PATH_BACK:', PATH_BACK)
+    return fetch(`${PATH_BACK}/cookie`, { credentials: 'include' })
         .then(data => data)
 }
 
@@ -30,7 +33,7 @@ function GetCookie() {
     }
 
     async function handleCookie() {
-        connectWithAPI('cookie')
+        requestCookie()
             .then(response => {
                 console.log('response:', response)
                 return response.json()
