@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from "react"
+import Cookies from 'js-cookie'
+import { useState, useEffect } from "react"
 
 const PATH_BACK = process.env.NEXT_PUBLIC_PATH_BACK
 
@@ -27,6 +28,11 @@ function GetCookie() {
     const [response, setResponde] = useState('')
     const [ cookie, setCookie ] = useState('')
     const [ cookieRemoved, setCookieRemoved ] = useState('')
+
+    useEffect(() => {
+        const myCookie = Cookies.get('myCookie')
+        console.log('myCookie:', myCookie)
+    }, [])
 
     async function handleClick() {
         connectWithAPI()
