@@ -115,6 +115,10 @@ function GetCookie() {
             })
     }
 
+    async function simulateAuth() {
+        window.location.href = `${PATH_BACK}/simulateAuth`
+    }
+
     return (
         <>
             <button onClick={() => {handleClick()}}>Conectarte con la API</button>
@@ -130,6 +134,8 @@ function GetCookie() {
             <button onClick={() => {addCustomHeader()}}>Agregar header personalizado</button>
             <br/>
             <button onClick={() => {requestWithRedirection()}}>Solicitud con redirección</button>
+            <br/>
+            <button onClick={() => {simulateAuth()}}>Simular autenticación</button>
         </>
     )
 }
