@@ -23,6 +23,28 @@ function removeAllCookies() {
         .then(data => data)
 }
 
+function addHeader() {
+    console.log('PATH_BACK:', `${PATH_BACK}/addCustomHeader`)
+    return fetch(`${PATH_BACK}/addCustomHeader`, {
+        credentials: 'include',
+        cache: 'no-store',
+        method: 'POST'
+    })
+        .then(response => {
+            const headers = response.headers
+            for (const [key, value] of headers.entries()) {
+                console.log(`${key}: ${value}`)
+            }
+            return response
+        })
+}
+
+function sendRedirection() {
+    console.log('PATH_BACK:', `${PATH_BACK}/redirectionToA`)
+    return fetch(`${PATH_BACK}/redirectionToA`, { credentials: 'include', cache: 'no-store' })
+        .then(data => data)
+}
+
 function GetCookie() {
 
     const [response, setResponde] = useState('')
@@ -40,7 +62,7 @@ function GetCookie() {
                 return response.json()
             })
             .then(data => {
-                console.log(data)
+                console.log('data:', data)
                 setResponde(data)
             })
     }
@@ -69,6 +91,30 @@ function GetCookie() {
             })
     }
 
+    async function addCustomHeader() {
+        addHeader()
+            .then(response => {
+                console.log('response:', response)
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                // setCookie(data)
+            })
+    }
+
+    async function requestWithRedirection() {
+        sendRedirection()
+            .then(response => {
+                console.log('response:', response)
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                // setCookie(data)
+            })
+    }
+
     return (
         <>
             <button onClick={() => {handleClick()}}>Conectarte con la API</button>
@@ -80,6 +126,10 @@ function GetCookie() {
             <br/>
             <button onClick={() => {removeCookie()}}>Eliminar la Cookie</button>
             <label>La cookie que eliminé es: <span>{cookieRemoved}</span></label>
+            <br/>
+            <button onClick={() => {addCustomHeader()}}>Agregar header personalizado</button>
+            <br/>
+            <button onClick={() => {requestWithRedirection()}}>Solicitud con redirección</button>
         </>
     )
 }
