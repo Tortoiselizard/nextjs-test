@@ -3,12 +3,16 @@
 import GetCookie from '@/components/GetCookie/GetCookie'
 import ConnectSSE from '@/components/ConnectSSE/ConnectSSE'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Home() {
 
-  const [ connected, setConnected ] = useState(false)
+  const [ user, setConnected ] = useState(false)
   
+  // useEffect(() => {
+  //   console.log('user:', user)
+  // }, [user])
+
   return (
     <>
       <h1>Hola mundo</h1>
@@ -16,14 +20,16 @@ function Home() {
       <br></br>
       <br></br>
       <button onClick={() => {setConnected(true)}}>conectar</button>
-      {
-        connected && (
+      <br/>
+      <label>{ typeof user === 'string' ? user : ''}</label>
+      {/* {
+        user === true && (
           <>
             <button onClick={() => {setConnected(false)}}>desconectar</button>
-            <ConnectSSE />
+            <ConnectSSE setConnected={setConnected}/>
           </>
         )
-      }
+      } */}
     </>
   )
 }
