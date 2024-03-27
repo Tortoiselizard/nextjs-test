@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { useState, useEffect } from "react"
 
 const PATH_BACK = process.env.NEXT_PUBLIC_PATH_BACK
+const DOMINE = process.env.NEXT_PUBLIC_DOMINE
 
 function connectWithAPI() {
     console.log('PATH_BACK:', PATH_BACK)
@@ -125,7 +126,8 @@ function GetCookie() {
     }
 
     function saveCookie() {
-        document.cookie = 'myCookie=Cookie desde el front; Secure; SameSite=Lax'
+        // document.cookie = `myCookie=Cookie desde el front; Secure; SameSite=None; Path=/`
+        document.cookie = `myCookie=Cookie desde el front; Secure; SameSite=None; Domain=${DOMINE}; Path=/`
     }
 
     return (
