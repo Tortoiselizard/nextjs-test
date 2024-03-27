@@ -119,11 +119,22 @@ function GetCookie() {
         window.location.href = `${PATH_BACK}/simulateAuth`
     }
 
+    async function simulateAuthNewTag() {
+        window.open(`${PATH_BACK}/redirectionToA`, '_blanck')
+        // window.open(`https://www.google.com/`, '_blanck')
+    }
+
+    function saveCookie() {
+        document.cookie = 'myCookie=Cookie desde el front; Secure; SameSite=Lax'
+    }
+
     return (
         <>
             <button onClick={() => {handleClick()}}>Conectarte con la API</button>
             <br/>
             <label>Retorno del fetch: <span>{response}</span></label>
+            <br/>
+            <button onClick={() => {saveCookie()}}>Guardar Cookie desde el front</button>
             <br/>
             <button onClick={() => {handleCookie()}}>Solicitar Cookie</button>
             <label>La cookie que recibí es: <span>{cookie}</span></label>
@@ -136,6 +147,8 @@ function GetCookie() {
             <button onClick={() => {requestWithRedirection()}}>Solicitud con redirección</button>
             <br/>
             <button onClick={() => {simulateAuth()}}>Simular autenticación</button>
+            <br/>
+            <button onClick={() => {simulateAuthNewTag()}}>Simular autenticación en pestaña nueva</button>
         </>
     )
 }
