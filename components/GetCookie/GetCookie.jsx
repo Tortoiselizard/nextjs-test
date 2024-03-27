@@ -46,6 +46,19 @@ function sendRedirection() {
         .then(data => data)
 }
 
+function sentCookieToSaveInFront(cookie) {
+    console.log('cookie a pasar:', cookie)
+    console.log('PATH_BACK:', `${PATH_BACK}/cookieBack`)
+    return fetch(`${PATH_BACK}/cookie-back`, {
+        credentials: 'include',
+        cache: 'no-store',
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({cookie})
+    })
+        .then(data => data)
+}
+
 function GetCookie() {
 
     const [response, setResponde] = useState('')
@@ -126,8 +139,23 @@ function GetCookie() {
     }
 
     function saveCookie() {
-        // document.cookie = `myCookie=Cookie desde el front; Secure; SameSite=None; Path=/`
-        document.cookie = `myCookie=Cookie desde el front; Secure; SameSite=None; Domain=${DOMINE}; Path=/`
+        document.cookie = `myCookie=Cookie desde el front; Secure; SameSite=None; Path=/`
+        console.log('DOMINE:', DOMINE)
+        // document.cookie = `myCookie=Cookie desde el front; Secure; SameSite=None; Domain=${DOMINE}; Path=/`
+    }
+
+    function saveCookieFromBack() {
+        const cookie = `myCookie=Cookie desde el front; Secure; SameSite=None; Path=/`
+        console.log(`estoy pasando como cookie: ${cookie} a la función sentCookieToSaveInFront`)
+        sentCookieToSaveInFront(cookie)
+            .then(response => {
+                console.log('response:', response)
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                // setCookie(data)
+            })
     }
 
     return (
@@ -137,6 +165,8 @@ function GetCookie() {
             <label>Retorno del fetch: <span>{response}</span></label>
             <br/>
             <button onClick={() => {saveCookie()}}>Guardar Cookie desde el front</button>
+            <br/>
+            <button onClick={saveCookieFromBack}>Guardar Cookie pasandola al back para que me la retorne</button>
             <br/>
             <button onClick={() => {handleCookie()}}>Solicitar Cookie</button>
             <label>La cookie que recibí es: <span>{cookie}</span></label>
